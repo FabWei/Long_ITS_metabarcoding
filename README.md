@@ -2,7 +2,7 @@
 
 This pipeline compiles various tools for processing data from Oxford Nanopore Technologies (ONT) for fungal metabarcodign studies using the full ITS. It provides a modular solution suitable for trimming and filtering data, removing chimeras and host contamination, extracting the ITS fragment, and allowing taxonomic classification. Although it was created to process data from fungal ITS with a high content of host reads, it could be adjusted to work with other eukaryotes or user's necessities. 
 
-![](/Long_ITS_metabarcoding/Figures/Workflow.jpeg)
+![](/Figures/Workflow.jpeg)
 
 
 ## Requirements and dependencies
