@@ -1,0 +1,7 @@
+name: emu
+channels:
+- conda-forge
+- base
+- bioconda
+dependencies:
+- emu=3.5.5

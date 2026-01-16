@@ -1,0 +1,50 @@
+datadir: "path_to_data/Long_ITS_metabarcoding/Example"
+
+# Trimming parameters:
+trimming:
+  forward: TTTCTGTTGGTGCTGATATTGC
+  reverse: ACTTGCCTGTCGCTCTATCTTC
+  q_score: 10
+  min_length: 580
+  max_length: 1050
+
+# Preclustering parameters:
+preclustering:
+  id: 0.97
+  minsl: 0.9
+
+# Host decontamination:
+refseq: ""
+
+# ITS extraction parameters:
+itsx:
+  cpu: 90
+  e_val: 1e-1
+  regions: "ITS1,5.8S,ITS2,LSU"
+
+# Classification parameters
+database: "/Pipeline/DB_folder"
+classifier: "emu"
+
+vsearch_class:
+  id: 0.97
+  minsl: 0.9
+  minsize: 2
+  threads: 20
+
+unite_vsearch:
+  fungi:
+    file: utax_reference_dataset_19.02.2025.fasta
+    url: https://doi.plutof.ut.ee/doi/10.15156/BIO/3301245
+
+  euk:
+    file: utax_reference_dataset_all_19.02.2025.fasta
+    url: https://doi.plutof.ut.ee/doi/10.15156/BIO/3301246
+
+
+emu_class:
+  threads: 24
+
+unite_emu:
+  fungi: "unite-fungi"
+  euk: "unite-all"
