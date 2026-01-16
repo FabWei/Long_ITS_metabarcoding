@@ -1,13 +1,13 @@
 # Full ITS data processing for Nanopore sequences 🧬
 
-This pipeline compiles various tools for processing data from Oxford Nanopore Technologies (ONT) for fungal metabarcodign studies using the full ITS. It provides a modular solution suitable for trimming and filtering data, removing chimeras and host contamination, extracting the ITS fragment, and allowing taxonomic classification. Although it was created to process data from fungal ITS with a high content of host reads, it could be adjusted to work with other eukaryotes or user's necessities. 
+This pipeline compiles various tools for processing data from Oxford Nanopore Technologies (ONT) for fungal metabarcodign studies using the full ITS. It provides a modular solution suitable for trimming and filtering data, removing chimeras and host contamination, extracting the ITS fragment, and allowing taxonomic classification. Although it was created to process data from fungal ITS with a high content of host reads, it could be adjusted to work with other eukaryotes or user necessities. 
 
 ![](/Figures/Workflow.jpeg)
 
 
 ## Requirements and dependencies
 
-This pipeline was implemented in snakemake and requires conda to create the different environments. Here are listed the version of the tools that we tested; however, new versions might work and should be modified in the `envs` files.
+This pipeline was implemented in snakemake and requires conda to create the different environments. Listed here are the versions of the tools we tested; however, new versions might work and should be modified in the `envs` files. The pipeline has been tested on independent installations of linux operation systems and flavours of WSL. Hardware requirements are depending on the difficulty / size of the jobs the user runs. A good start to run the pipeline with example data is 16 GB ram and 8 cores CPU, preferentially with 8 GB CUDA-compatible GPU.
 
 ### Dependencies
 
@@ -43,6 +43,8 @@ We tested the pipeline with the Unite database as described below. A [DB_folder]
 - Do not forget to run snakemake using the `--use-conda` flag. Otherwise, the environments will not be created.
 - Be sure that you have enough storage space in the folder provided with your data. All the outputs will be created in the same path. 
 - Modify the parameters in the [config.yaml](/config.yaml) file, when needed.
+
+__*Please use the trial run below as guidance on how to use the pipeline.*__ 
 
 ### 1. Input data
 This pipeline was designed to use demultiplexed data as an input. We suggest to use [Dorado](https://github.com/nanoporetech/dorado) and [Guppy](https://nanoporetech.com/document/Guppy-protocol#guppy-software-overview) to perform the basecalling and demultiplexing process. In case of questions, please use this [guide](https://github.com/Claudia-Barrera/Nanopore_16S) as a reference. Once demultiplexed your sequenced should be organized in individual folders per barcode named as `barcode*` and compiled in a main folder. Please set the path to the main folder in the [config.yaml](/config.yaml) file using the **datadir** parameter.
@@ -121,5 +123,27 @@ For Emu, you will get a `rel-abundance.tsv` file with the relative abundance of 
 
 For vsearch, an additional `06_Clustering` folder will be created containing the abundance results in the `otutab.txt`file and the representative sequence per OTU in the `representative_seq.fasta` file. A `taxonomy_euk/fungi.txt` file will be available in the `07_Classification` folder. 
 
+
+## Trial run
+*expects installations of conda, snakemake, and osf.* 
+Download the repository to a folder of your choice and unzip:
+```
+wget https://github.com/Claudia-Barrera/Long_ITS_metabarcoding/archive/refs/heads/master.tar.gz
+tar xvfz master.tar.gz
+```
+move to the downloaded folder and activate the snakemake environment
+```
+cd Long_ITS_metabarcoding-master/
+conda activate snakemake
+```
+change parameters in the config.yaml according to your needs, for running the example use:
+```
+datadir: "Example"
+```
+run the snakemake pipeline
+*helpful parameters here are ...*
+```
+snakemake --use-conda --cores 8 --verbose --printshellcmds
+```
 
 
